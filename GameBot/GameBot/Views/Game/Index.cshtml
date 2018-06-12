@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GameBot.Models.GameViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of Games</h2>
+
+<table class="table">
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <a href="@Url.Action("BotSettings", "Game", new { id = item.Id })">
+                    <img src="@item.Avatar" style="width: 200px; height: 100px;" border="0" />
+                </a>
+            </td>
+            <td>
+                <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>
