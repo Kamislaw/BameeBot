@@ -76,17 +76,17 @@ namespace GameBot.Controllers
             //return PartialView(@"~/Views/Game/_ListOfSettingsPartial.cshtml");
 
         }
-        public ActionResult GetListOfSettings() {
+        public ActionResult GetListOfSettings(BotViewModel vm) {
             var ctx = new ApplicationDbContext();
-
-            var model = ctx.Bots.Select(x => new BotViewModel {
+           var model = ctx.Bots.Where(x => x.GameID == vm.GameID).ToList();
+           var bots = model.Select(x => new BotViewModel {
                 Id = x.Id,
                 Login = x.Login,
                 Password = x.Password,
                 StartBot = x.StartBot,
             });
 
-            return PartialView("_ListOfSettingsPartial", model);
+            return PartialView("_ListOfSettingsPartial", bots);
         }
         
     }
